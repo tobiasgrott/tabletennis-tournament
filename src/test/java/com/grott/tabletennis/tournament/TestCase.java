@@ -1,8 +1,7 @@
-package sample;
+package com.grott.tabletennis.tournament;
 
+import org.junit.Assert;
 import org.junit.Test;
-
-import junit.framework.Assert;
 
 public class TestCase {
 
