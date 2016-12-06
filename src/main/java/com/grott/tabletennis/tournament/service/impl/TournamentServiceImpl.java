@@ -7,8 +7,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +26,6 @@ import com.grott.tabletennis.tournament.service.TournamentServiceIF;
 
 @Service
 public class TournamentServiceImpl implements TournamentServiceIF {
-	@PersistenceContext
-	private EntityManager em;
 
 	@Autowired
 	private GameRepository gameRepo;
@@ -302,7 +298,6 @@ public class TournamentServiceImpl implements TournamentServiceIF {
 			newRound.setGames(new ArrayList<Game>());
 			if (r != null) {
 				r.setValid(false);
-				;
 				roundRepo.save(r);
 				newRound.setNumber(r.getNumber() + 1);
 			} else {

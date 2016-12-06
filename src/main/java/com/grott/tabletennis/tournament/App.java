@@ -18,9 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class App {
 
 	public static void main(String[] args) {
-		try (ConfigurableApplicationContext run = SpringApplication.run(App.class, args)) {
-			// Try block to use autoclosable application context
-		}
+		SpringApplication.run(App.class, args);
 	}
 
 	/**
