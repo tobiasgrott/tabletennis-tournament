@@ -24,6 +24,9 @@ public class Player {
 	@Column(name = "team")
 	private String team;
 
+	@Column(name = "ttr")
+	private Integer ttr;
+
 	@OneToMany(mappedBy = "player1")
 	private List<Game> homeGames;
 
@@ -76,5 +79,13 @@ public class Player {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Integer getTtr() {
+		return ttr;
+	}
+
+	public void setTtr(Integer ttr) {
+		this.ttr = ttr;
 	}
 }
