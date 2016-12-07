@@ -69,4 +69,12 @@ public class RoundRestController {
 	public Round getRound(@PathVariable Integer nr) {
 		return roundRepo.findByNumber(nr);
 	}
+	/**
+	 * Rest Resource to get the current round 
+	 * @return
+	 */
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public Round getCurrentRound(){
+		return roundRepo.findByValidTrue();
+	}
 }

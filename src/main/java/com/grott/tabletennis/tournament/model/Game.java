@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Game {
 
@@ -35,6 +37,7 @@ public class Game {
 	@Column(name = "player2Id")
 	private Long player2Id;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "roundId", insertable = false, updatable = false)
 	private Round round;

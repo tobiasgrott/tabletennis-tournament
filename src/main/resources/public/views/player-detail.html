@@ -1,0 +1,36 @@
+<div class="container">
+    <h1>Player details</h1>
+
+    <form novalidate="novalidate" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="inputFirstName">Firstname:</label>
+            <div class="controls">
+                <input type="text" id="inputFirstName" ng-model="player.firstname" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputLastName">Lastname:</label>
+            <div class="controls">
+                <input type="text" id="inputLastName" ng-model="player.lastname" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputTeam">Team:</label>
+            <div class="controls">
+                <input type="text" id="inputTeam" ng-model="player.team" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputTtr">TTR:</label>
+            <div class="controls">
+                <input type="text" id="inputTtr" ng-model="player.ttr" />
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <a ng-click="cancel()" class="btn btn-small btn-primary">cancel</a>
+                <a ng-click="updatePlayer()" class="btn btn-small btn-primary">save</a>
+            </div>
+        </div>
+    </form>
+</div>

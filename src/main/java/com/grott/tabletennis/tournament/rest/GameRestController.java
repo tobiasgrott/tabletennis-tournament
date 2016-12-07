@@ -1,5 +1,7 @@
 package com.grott.tabletennis.tournament.rest;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +26,7 @@ public class GameRestController {
 	 * @param dtoGameIn
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	@Transactional
 	public Game setResult(@PathVariable Long id, @RequestBody DtoGameIn gameIn) {
 		Game g = gameRepo.findOne(id);
 		g.setSets1(gameIn.getSets1());

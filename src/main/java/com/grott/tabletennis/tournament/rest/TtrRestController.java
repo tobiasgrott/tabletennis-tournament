@@ -26,7 +26,7 @@ public class TtrRestController {
 	private TournamentServiceIF tournamentService;
 
 	@Transactional
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public List<DtoPlayer> getOverviewPlayer() {
 		List<Player> l = tournamentService.getRanking(SortType.TTR);
 		List<DtoPlayer> retval = new ArrayList<>();

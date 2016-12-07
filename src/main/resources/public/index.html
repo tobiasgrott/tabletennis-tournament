@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Tabletennis Tournament</title>
+<meta name="description" content="">
+<meta name="viewport" content="device-width">
+</head>
+<body ng-app="ngapp" ng-cloak layout="row">
+	<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navigationbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse" id="navigationbar">
+				<ul class="nav navbar-nav">
+					<li><a href="#/views/player-list">Player list</a></li>
+					<li><a href="#/views/player-creation">Player creation</a></li>
+					<li><a href="#/views/crosstable">Crosstable</a></li>
+					<li><a href="#/views/ranking/ttr">TTR-Ranking</a></li>
+					<li><a href="#/views/ranking/wins">Ranking</a></li>
+					<li><a href="#/views/rounds">Rounds</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<div ng-view></div>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-resource.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-sanitize.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.js"></script>
+	
+	<script src="./app.js"></script>
+	<script src="./services/services.js"></script>
+	<script src="./controller/controller.js"></script>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap.min.js"></script>
+</body>
+</html>

@@ -30,7 +30,7 @@ public class RankingRestController {
 		return getRanking(SortType.WINS);
 	}
 
-	@RequestMapping(value = "/crossTable", method = RequestMethod.GET)
+	@RequestMapping(value = "/crosstable", method = RequestMethod.GET)
 	public List<DtoCrosstable> getCrossTable() {
 		List<Player> l = tournamentService.getRanking(SortType.WINS);
 		List<DtoCrosstable> lct = new ArrayList<>();

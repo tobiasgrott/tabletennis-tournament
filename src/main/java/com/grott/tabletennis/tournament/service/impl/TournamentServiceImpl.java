@@ -1,6 +1,7 @@
 package com.grott.tabletennis.tournament.service.impl;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -140,20 +141,26 @@ public class TournamentServiceImpl implements TournamentServiceIF {
 	public double calculateProbability(long myTtr, long oppTtr) {
 		double zaehler = 1.0d;
 		double ttrdiff = (double) oppTtr - myTtr;
-		return zaehler / (zaehler + Math.pow(10.0d, ttrdiff / 150.0d));
+		double ttrdiffFactor = ttrdiff / 150.0d;
+		double divisor = zaehler + Math.pow(10.0d, ttrdiffFactor);
+		return zaehler / divisor;
 	}
 
 	private DtoTtrChange getTtrChange(GameType type, List<Game> games) {
 		DtoTtrChange retval = new DtoTtrChange();
 		double probability = 0.0d;
 		int wins = 0;
-		int relevantGames = 0;
 		for (Game g : games) {
 			if (g.getPlayer1().getTtr() != null && g.getPlayer2().getTtr() != null && g.getSets1() != null
 					&& g.getSets2() != null) {
-				probability += calculateProbability(g.getPlayer1().getTtr(), g.getPlayer2().getTtr());
-				relevantGames++;
-				if (g.getSets1() > g.getSets2()) {
+				if (type == GameType.HOME) {
+					probability += calculateProbability(g.getPlayer1().getTtr(), g.getPlayer2().getTtr());
+				} else if (type == GameType.GUEST) {
+					probability += calculateProbability(g.getPlayer2().getTtr(), g.getPlayer1().getTtr());
+				}
+				if (type == GameType.HOME && g.getSets1() > g.getSets2()) {
+					wins++;
+				} else if (type == GameType.GUEST && g.getSets2() > g.getSets1()) {
 					wins++;
 				}
 			}
@@ -162,8 +169,8 @@ public class TournamentServiceImpl implements TournamentServiceIF {
 			retval.setProbability(probability);
 			retval.setWins(wins);
 		} else {
-			retval.setWins(relevantGames - wins);
-			retval.setProbability(relevantGames - probability);
+			retval.setWins(wins);
+			retval.setProbability(probability);
 		}
 		return retval;
 	}
@@ -186,7 +193,7 @@ public class TournamentServiceImpl implements TournamentServiceIF {
 		int wins = ttrChangeHome.getWins() + ttrChangeGuest.getWins();
 
 		BigDecimal value = BigDecimal.valueOf(wins);
-		value = value.subtract(BigDecimal.valueOf(probability)).multiply(BigDecimal.valueOf(factor));
+		value = value.subtract(BigDecimal.valueOf(probability)).multiply(BigDecimal.valueOf(factor)).setScale(0,RoundingMode.HALF_UP);
 		return value.intValue();
 	}
 
