@@ -20,14 +20,15 @@ public class BatchRestContoller {
 	private GameRepository gameRepo;
 	@Autowired
 	private RoundRepository roundRepo;
-	
+
 	/**
 	 * Clear all Tournament data
+	 * 
 	 * @return
 	 */
 	@Transactional
-	@RequestMapping(value="/reset",method = RequestMethod.POST)
-	public String resetData(){
+	@RequestMapping(value = "/reset", method = RequestMethod.POST)
+	public String resetData() {
 		gameRepo.deleteAllInBatch();
 		roundRepo.deleteAllInBatch();
 		playerRepo.deleteAllInBatch();

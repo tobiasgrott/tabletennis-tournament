@@ -6,7 +6,7 @@ import org.junit.Test;
 public class TestCase {
 
 	@Test
-	public void testCase(){
+	public void testCase() {
 		String input = "Hello World";
 		Assert.assertEquals("Hello World", input);
 	}

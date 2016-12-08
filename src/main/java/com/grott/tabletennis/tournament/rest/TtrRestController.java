@@ -22,6 +22,9 @@ import com.grott.tabletennis.tournament.service.TournamentServiceIF;
 @RestController
 @RequestMapping("/ttr-overview")
 public class TtrRestController {
+	private static final int PROBABILITY_SCALE = 3;
+	private static final int TTR_SCALE = 0;
+	private static final int TTR_FACTOR = 16;
 	@Autowired
 	private TournamentServiceIF tournamentService;
 
@@ -43,9 +46,9 @@ public class TtrRestController {
 				if (p.getTtr() != null && g.getPlayer2().getTtr() != null) {
 					double probDouble = tournamentService.calculateProbability(p.getTtr(), g.getPlayer2().getTtr());
 					BigDecimal prob = BigDecimal.valueOf(probDouble);
-					dto.setProbability(prob.setScale(3, RoundingMode.HALF_UP));
+					dto.setProbability(prob.setScale(PROBABILITY_SCALE, RoundingMode.HALF_UP));
 					dto.setTtrChange(
-							prob.multiply(BigDecimal.valueOf(16)).setScale(0, RoundingMode.HALF_UP).longValue());
+							prob.multiply(BigDecimal.valueOf(TTR_FACTOR)).setScale(TTR_SCALE, RoundingMode.HALF_UP).longValue());
 				}
 				dto.setWin(g.getSets1() > g.getSets2());
 				dtoPlayer.getGames().add(dto);

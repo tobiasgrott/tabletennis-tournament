@@ -11,17 +11,17 @@ import javax.persistence.OneToMany;
 @Entity
 public class Round {
 	@Id
-	@Column(name="id")
+	@Column(name = "id")
 	@GeneratedValue
 	private Long id;
-	
-	@OneToMany(mappedBy="round")
+
+	@OneToMany(mappedBy = "round")
 	private List<Game> games;
-	
-	@Column(name="valid")
+
+	@Column(name = "valid")
 	private Boolean valid;
-	
-	@Column(name="number")
+
+	@Column(name = "number")
 	private Integer number;
 
 	public Long getId() {

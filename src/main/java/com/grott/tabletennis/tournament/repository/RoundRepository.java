@@ -10,7 +10,7 @@ public interface RoundRepository extends JpaRepository<Round, Long> {
 	 * 
 	 * @return
 	 */
-	public Round findByValidTrue();
+	Round findByValidTrue();
 
 	/**
 	 * Find the round by a given number
@@ -18,5 +18,5 @@ public interface RoundRepository extends JpaRepository<Round, Long> {
 	 * @param number
 	 * @return
 	 */
-	public Round findByNumber(Integer number);
+	Round findByNumber(Integer number);
 }
