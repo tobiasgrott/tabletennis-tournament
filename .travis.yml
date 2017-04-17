@@ -4,8 +4,6 @@ install: true
 addons:
   sonarqube:
     organization: "tobiasgrott-github"
-    token:
-      secure: "aa94e12055bb756ff7df2f90d99073889e01e1b6"
 jdk:
   - oraclejdk8
 script:
