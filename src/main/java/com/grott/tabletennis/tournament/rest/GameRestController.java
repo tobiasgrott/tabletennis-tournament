@@ -4,9 +4,9 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grott.tabletennis.tournament.model.Game;
@@ -25,10 +25,10 @@ public class GameRestController {
 	 * @param id
 	 * @param dtoGameIn
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	@PutMapping(value = "/{id}")
 	@Transactional
 	public Game setResult(@PathVariable Long id, @RequestBody DtoGameIn gameIn) {
-		Game g = gameRepo.findOne(id);
+		Game g = gameRepo.getById(id);
 		g.setSets1(gameIn.getSets1());
 		g.setSets2(gameIn.getSets2());
 		g = gameRepo.save(g);

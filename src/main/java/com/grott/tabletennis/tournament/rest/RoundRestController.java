@@ -54,7 +54,7 @@ public class RoundRestController {
 		} else if (!tournamentService.calculateNewRound().isEmpty()) {
 			dto.setAdditionalRound(true);
 		}
-		List<Round> lr = roundRepo.findAll(new Sort(Direction.ASC, "id"));
+		List<Round> lr = roundRepo.findAll(Sort.by(Direction.ASC, "id"));
 		dto.setMaxRound(lr.size());
 		return dto;
 	}

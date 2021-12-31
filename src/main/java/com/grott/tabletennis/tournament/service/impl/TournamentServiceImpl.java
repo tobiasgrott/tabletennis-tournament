@@ -97,7 +97,7 @@ public class TournamentServiceImpl implements TournamentServiceIF {
 	@Override
 	public int getWins(Long playerId) {
 		int wins = 0;
-		Player p = playerRepo.findOne(playerId);
+		Player p = playerRepo.getById(playerId);
 		for (Game g : p.getHomeGames()) {
 			if (g.getSets1() != null && g.getSets1() > g.getSets2()) {
 				wins++;
@@ -120,7 +120,7 @@ public class TournamentServiceImpl implements TournamentServiceIF {
 	@Override
 	public int getBuchholz(Long playerId) {
 		int buchholz = 0;
-		Player p = playerRepo.findOne(playerId);
+		Player p = playerRepo.getById(playerId);
 		for (Game g : p.getHomeGames()) {
 			buchholz += getWins(g.getPlayer2Id());
 		}
@@ -158,9 +158,8 @@ public class TournamentServiceImpl implements TournamentServiceIF {
 				} else if (type == GameType.GUEST) {
 					probability += calculateProbability(g.getPlayer2().getTtr(), g.getPlayer1().getTtr());
 				}
-				if (type == GameType.HOME && g.getSets1() > g.getSets2()) {
-					wins++;
-				} else if (type == GameType.GUEST && g.getSets2() > g.getSets1()) {
+				if (type == GameType.HOME && g.getSets1() > g.getSets2()
+						|| type == GameType.GUEST && g.getSets2() > g.getSets1()) {
 					wins++;
 				}
 			}
@@ -183,7 +182,7 @@ public class TournamentServiceImpl implements TournamentServiceIF {
 	 */
 	@Override
 	public int getTtrChange(Long playerId) {
-		Player p = playerRepo.findOne(playerId);
+		Player p = playerRepo.getById(playerId);
 		final int factor = 16;
 
 		DtoTtrChange ttrChangeHome = getTtrChange(GameType.HOME, p.getHomeGames());
@@ -193,7 +192,8 @@ public class TournamentServiceImpl implements TournamentServiceIF {
 		int wins = ttrChangeHome.getWins() + ttrChangeGuest.getWins();
 
 		BigDecimal value = BigDecimal.valueOf(wins);
-		value = value.subtract(BigDecimal.valueOf(probability)).multiply(BigDecimal.valueOf(factor)).setScale(0,RoundingMode.HALF_UP);
+		value = value.subtract(BigDecimal.valueOf(probability)).multiply(BigDecimal.valueOf(factor)).setScale(0,
+				RoundingMode.HALF_UP);
 		return value.intValue();
 	}
 
@@ -302,7 +302,7 @@ public class TournamentServiceImpl implements TournamentServiceIF {
 			Round r = roundRepo.findByValidTrue();
 			Round newRound = new Round();
 			newRound.setValid(true);
-			newRound.setGames(new ArrayList<Game>());
+			newRound.setGames(new ArrayList<>());
 			if (r != null) {
 				r.setValid(false);
 				roundRepo.save(r);
